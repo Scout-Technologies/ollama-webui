@@ -1,0 +1,16 @@
+FROM openresty/openresty:latest
+
+# Uncomment below for SSL
+# Install Certbot
+# RUN apt-get update && \
+#     apt-get install -y certbot 
+# Copy certificate renewal script
+# COPY renew-certs.sh /usr/local/bin/renew-certs.sh
+# RUN chmod +x /usr/local/bin/renew-certs.sh
+
+# Copy entrypoint script
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/usr/local/openresty/bin/openresty", "-g", "daemon off;"]
